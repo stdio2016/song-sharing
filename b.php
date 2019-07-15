@@ -49,7 +49,12 @@ function getLang() {
   return $lang;
 }
 
+function logged_in() {
+  return isset($_SESSION['songs/user']);
+}
+
 if (!isset($no_translation)) {
   $lang = getLang();
+  include("lang/en.php");
   include("lang/$lang.php");
 }

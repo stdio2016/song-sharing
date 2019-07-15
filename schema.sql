@@ -44,6 +44,33 @@ LOCK TABLES `comment` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `multitrack`
+--
+
+DROP TABLE IF EXISTS `multitrack`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `multitrack` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `song` int(11) NOT NULL,
+  `part` varchar(81) NOT NULL,
+  `file` varchar(80) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `song` (`song`),
+  CONSTRAINT `multitrack_ibfk_1` FOREIGN KEY (`song`) REFERENCES `sounds` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `multitrack`
+--
+
+LOCK TABLES `multitrack` WRITE;
+/*!40000 ALTER TABLE `multitrack` DISABLE KEYS */;
+/*!40000 ALTER TABLE `multitrack` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `sounds`
 --
 
@@ -54,11 +81,11 @@ CREATE TABLE `sounds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `date` datetime NOT NULL,
-  `file` varchar(24) NOT NULL,
+  `file` varchar(80) NOT NULL,
   `description` text NOT NULL,
   `user` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,4 +106,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-15 17:42:13
+-- Dump completed on 2019-07-15 20:13:12

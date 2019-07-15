@@ -40,7 +40,8 @@ $user = isset($_SESSION['songs/user']) ? $_SESSION['songs/user'] : "";
   <source src="<?=BASE_PATH?>/files/<?= $f['file'] ?>.wav" type="audio/wav">
   <source src="<?=BASE_PATH?>/files/<?= $f['file'] ?>.mp3" type="audio/mpeg">
   <!-- sorry IE users -->
-  <embed src="<?=BASE_PATH?>/files/<?= $f['file'] ?>.mp3" width='250' height='40'>
+  <embed src="<?=BASE_PATH?>/files/<?= $f['file'] ?>.mp3" width='250' height='40'
+    autostart="False">
 </audio>
 <!--[if gte IE 8]><!-->
 <h2><?=$trans['comment']?></h2>

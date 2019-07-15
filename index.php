@@ -12,12 +12,14 @@ $names = $query->fetchAll();
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?=$trans['record list']?></title>
-<link rel="stylesheet" href="/css/homepage.css">
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="<?=BASE_PATH?>/css/main.css">
 </head>
 <body>
 <?php include 'login.php'; ?>
 <h1><?=$trans['record list']?></h1>
+<?php if (logged_in()) { ?>
+<a href='upload.php'>Add sound</a>
+<?php } ?>
 <hr>
 <?php if (!$names) { ?>
 <p><?=$trans['constructing...']?></p>

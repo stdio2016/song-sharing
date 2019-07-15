@@ -1,5 +1,5 @@
 <?php
-$trans = array();
+if (!isset($trans)) $trans = array();
 $trans['record list'] = '录音列表';
 $trans['constructing...'] = '本网站还在建构中～～你可以稍后再来看看';
 $trans['time:'] = '时间：';

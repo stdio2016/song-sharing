@@ -5,7 +5,7 @@ if (!logged_in()) {
   $_SESSION['songs/msg'] = $trans['you must login to upload sound'];
   header('Location: index.php');
   exit();
-} 
+}
 ?>
 <!DOCTYPE html>
 <html lang="<?=$lang?>">
@@ -29,8 +29,8 @@ if (!logged_in()) {
   <input type="file" name="file">
 </p>
 <p>
-  <label for="descriptione"><?=$trans['description:']?></label><br>
-  <textarea name="descriptione" rows="8" style="width:100%;max-width:600px;"></textarea>
+  <label for="description"><?=$trans['description:']?></label><br>
+  <textarea name="description" rows="8" style="width:100%;max-width:600px;"></textarea>
 </p>
 <button type="submit"><?=$trans['ok']?></button>
 </form>

@@ -1,0 +1,23 @@
+<?php
+$trans = array();
+$trans['record list'] = '录音列表';
+$trans['constructing...'] = '本网站还在建构中～～你可以稍后再来看看';
+$trans['time:'] = '时间：';
+$trans['you are not logged in'] = '您尚未登录';
+$trans['type username:'] = '请输入用户名：';
+$trans['login'] = '登录';
+$trans['welcome,'] = '欢迎您，';
+$trans['logout'] = '登出';
+$trans['username restriction'] = '用户名只能使用英文字母和数字的组合，最多20个字';
+$trans['comment cannot be empty'] = '留言不能是空白';
+$trans['comment'] = '留言';
+$trans['you must login to make comment'] = '你必须先登录，才可以留言';
+$trans['ok'] = '确定';
+$trans['copyright'] = '&copy; 2016~2019 stdio2016 版权所有';
+$trans['recording not found'] = '找不到录音';
+$trans['recording not found reason'] = '可能是我把录音档给删了，抱歉';
+$trans['page not found'] = '找不到网页';
+$trans['this is not the place you should come'] = '这里似乎不是你该来的地方喔';
+$trans['you can '] = '你可以';
+$trans['go to homepage'] = '回首页';
+$trans['you are using old and unsupported ie'] = "本网站不支援 IE，请改用 Chrome 或 Firefox";

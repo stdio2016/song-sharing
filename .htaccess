@@ -1,0 +1,12 @@
+RewriteEngine on
+
+## set language
+RewriteRule ^(en|zh|zh-tw)/(.*)$  $2?lang=$1 [QSA]
+
+RewriteRule \.(htaccess|htpasswd)$  404.php
+RewriteRule ^b.php$ 404.php [L,QSA]
+RewriteRule ^c.php$ 404.php [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule (.*) 404.php [L,QSA]

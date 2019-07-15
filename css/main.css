@@ -1,0 +1,29 @@
+html {
+  background-color: rgb(144, 255, 144);
+  background-image: url("../image/background.png")
+}
+footer {
+  text-align: center;
+}
+html.volatile-bg {
+  background-color: lightgray;
+  background-image: none;
+}
+.comment {
+  border: 1px black solid;
+  margin: 4px 0px;
+  padding: 2px;
+  border-radius: 6px;
+  background: palegreen;
+}
+.comment-text {
+  margin-left: 2em;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.comment > .floor {
+  margin-right: 20px;
+}
+.comment > .time {
+  margin-right: 20px;
+}

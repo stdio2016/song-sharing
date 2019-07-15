@@ -28,3 +28,4 @@ $trans['file:'] = 'File: ';
 $trans['description:'] = 'Description: ';
 $trans['upload success'] = 'Upload success';
 $trans['upload failed'] = 'Upload failed!';
+$trans['delete'] = 'Delete';

@@ -1,7 +1,7 @@
 <?php
 $mypath = 'play.php?id=' . $_GET['id'];
 require_once 'b.php';
-$sql = "SELECT name, `date`, file, description FROM sounds where id = :id";
+$sql = "SELECT name, `date`, file, description, user FROM sounds where id = :id";
 $query = $db->prepare($sql);
 if (!isset($_GET['id'])) {
   header('Location: index.php');
@@ -31,7 +31,13 @@ $user = isset($_SESSION['songs/user']) ? $_SESSION['songs/user'] : "";
 <p><?=$trans['recording not found reason']?></p>
 <?php } else { ?>
 <h1><?= $name ?></h1>
-<span class="date"><?= $f['date'] ?></span>
+<div class="author">
+  <span class="username"><?= $f['user'] ?></span>
+  <span class="time"><?= $f['date'] ?></span>
+</div>
+<?php if ($user === $f['user']) { ?>
+<a href="deleteSong.php?id=<?=$_GET['id']?>"><?=$trans['delete']?></a>
+<?php } ?>
 <hr>
 <p><?= $f['description'] ?></p>
 <audio controls>

@@ -27,3 +27,8 @@ html.volatile-bg {
 .comment > .time {
   margin-right: 20px;
 }
+.author > .time {
+  border-left: 1px solid gray;
+  margin-left: 20px;
+  padding-left: 20px;
+}

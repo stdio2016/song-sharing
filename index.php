@@ -10,7 +10,7 @@ $title = $trans['record list'];
 <?php include 'header.php'; ?>
 <h1><?=$title?></h1>
 <?php if (logged_in()) { ?>
-<a href='upload.php'>Add sound</a>
+<a href='upload.php'><?=$trans['upload sound']?></a>
 <?php } ?>
 <hr>
 <?php if (!$names) { ?>

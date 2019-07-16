@@ -24,6 +24,6 @@ foreach ($possible_ext as $ext) {
 $sql = "DELETE FROM sounds WHERE id = :id";
 $query = $db->prepare($sql);
 $query->execute(array(':id' => $_GET['id']));
-$_SESSION['songs/msg'] = '刪除成功';
+$_SESSION['songs/msg'] = $trans['delete success'];
 header('Location: index.php');
 exit();

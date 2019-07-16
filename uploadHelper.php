@@ -5,7 +5,8 @@ if (!logged_in()) {
   header('Location: index.php');
   exit();
 }
-if (!isset($_FILES['file']) || !isset($_POST['name'])) {
+if (!$_POST['name']) {
+  $_SESSION['songs/msg'] = $trans['upload too big'];
   header('Location: index.php');
   exit();
 }
@@ -16,14 +17,15 @@ if ($file['error'] !== 0) {
   exit();
 }
 $file_type = $file['type'];
-if (explode('/', $file_type)[0] !== 'audio') {
-  $_SESSION['songs/msg'] = '這不是聲音檔';
+$mime = explode('/', $file_type)[0];
+if ($mime !== 'audio' && $mime !== 'video') {
+  $_SESSION['songs/msg'] = $trans['not audio file'];
   header('Location: index.php');
   exit();
 }
 $extension = strtolower(pathinfo(basename($file['name']), PATHINFO_EXTENSION));
 if ($extension !== 'ogg' && $extension !== 'm4a' && $extension !== 'wav' && $extension !== 'mp3') {
-  $_SESSION['songs/msg'] = '這不是聲音檔';
+  $_SESSION['songs/msg'] = $trans['not audio file'];
   header('Location: index.php');
   exit();
 }

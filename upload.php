@@ -11,20 +11,31 @@ $title = $trans['upload sound'];
 <?php include 'header.php'; ?>
 <h1><?=$title?></h1>
 <hr>
-<form method="POST" action="uploadHelper.php" enctype="multipart/form-data">
+<form id='formUpload' method="POST" action="uploadHelper.php" enctype="multipart/form-data">
 <p>
   <label for="name"><?=$trans['name:']?></label>
-  <input type="text" name="name" value="">
+  <input type="text" name="name" value="" required>
 </p>
 <p>
   <label for="file"><?=$trans['file:']?></label>
-  <input type="file" name="file">
+  <input type="file" name="file" accept="audio/*" oninput="tryListen()">
 </p>
+<p><?=$trans['audio restriction']?></p>
+<p><audio id='tryAudio' controls></audio></p>
 <p>
   <label for="description"><?=$trans['description:']?></label><br>
   <textarea name="description" rows="8" style="width:100%;max-width:600px;"></textarea>
 </p>
 <button type="submit"><?=$trans['ok']?></button>
 </form>
+<script>
+function tryListen() {
+  URL.revokeObjectURL(tryAudio.src);
+  tryAudio.src = URL.createObjectURL(formUpload.file.files[0]);
+}
+onunload = function () {
+  URL.revokeObjectURL(tryAudio.src);
+}
+</script>
 <hr>
 <?php include 'footer.php';

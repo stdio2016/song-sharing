@@ -11,19 +11,9 @@ $query->execute(array(':id' => $_GET['id']));
 $f = $query->fetch();
 $name = htmlspecialchars($f['name']);
 $user = isset($_SESSION['songs/user']) ? $_SESSION['songs/user'] : "";
+$title = $f ? $name : $trans['recording not found'];
 ?>
-<!DOCTYPE html>
-<html lang="<?=$lang?>">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?= $f ? $name : $trans['recording not found'] ?></title>
-<link rel="stylesheet" href="<?=BASE_PATH?>/css/main.css">
-<script src="<?=BASE_PATH?>/js/validate.js" charset="utf-8"></script>
-<script src="<?=BASE_PATH?>/lang/<?=$lang?>.js" charset="utf-8"></script>
-</head>
-<body>
-<?php include 'login.php'; ?>
+<?php include 'header.php'; ?>
 <?php if (!$f) {
   http_response_code(404);
 ?>
@@ -39,7 +29,7 @@ $user = isset($_SESSION['songs/user']) ? $_SESSION['songs/user'] : "";
 <a href="deleteSong.php?id=<?=$_GET['id']?>"><?=$trans['delete']?></a>
 <?php } ?>
 <hr>
-<p><?= $f['description'] ?></p>
+<p><?= htmlspecialchars($f['description']) ?></p>
 <audio controls>
   <source src="<?=BASE_PATH?>/files/<?= $f['file'] ?>.ogg">
   <source src="<?=BASE_PATH?>/files/<?= $f['file'] ?>.m4a">
@@ -53,6 +43,7 @@ $user = isset($_SESSION['songs/user']) ? $_SESSION['songs/user'] : "";
 <h2><?=$trans['comment']?></h2>
   <?php if (isset($_SESSION['songs/user'])) { ?>
 
+<script src="<?=BASE_PATH?>/js/validate.js" charset="utf-8"></script>
 <form id='cmt' action="makeComment.php" method="post" onsubmit="return checkNoEmptyComment(event)">
   <input name='song' type="hidden" value='<?= $_GET['id'] ?>'>
   <textarea name='comment' maxlength="1000"></textarea><br>
@@ -72,4 +63,4 @@ $user = isset($_SESSION['songs/user']) ? $_SESSION['songs/user'] : "";
 <script src="<?=BASE_PATH?>/js/asyncComment.js" charset="utf-8"></script>
 <?php } ?>
 <hr>
-<?php require 'c.php';
+<?php require 'footer.php';

@@ -5,18 +5,10 @@ $sql = "SELECT id, name, `date` FROM sounds";
 $query = $db->prepare($sql);
 $query->execute();
 $names = $query->fetchAll();
+$title = $trans['record list'];
 ?>
-<!DOCTYPE html>
-<html lang="<?=$lang?>">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?=$trans['record list']?></title>
-<link rel="stylesheet" href="<?=BASE_PATH?>/css/main.css">
-</head>
-<body>
-<?php include 'login.php'; ?>
-<h1><?=$trans['record list']?></h1>
+<?php include 'header.php'; ?>
+<h1><?=$title?></h1>
 <?php if (logged_in()) { ?>
 <a href='upload.php'>Add sound</a>
 <?php } ?>
@@ -40,4 +32,4 @@ $names = $query->fetchAll();
 <![endif]-->
 <?php } ?>
 <hr>
-<?php require 'c.php';
+<?php require 'footer.php';

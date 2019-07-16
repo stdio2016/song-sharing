@@ -1,12 +1,6 @@
 <?php
 session_start();
-define('DB_TYPE', 'mysql');
-define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'songs');
-define('DB_USER', 'songs');
-define('DB_PASS', 'songs');
-
-define('BASE_PATH', '/songs');
+require 'config.php';
 
 try {
   $db = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING);

@@ -44,6 +44,9 @@ function createSpan(txt, cls) {
 }
 
 function deleteComment(id) {
+  var really = confirm(Translation['really want to delete comment?'] + ' ' +
+    Translation['cannot be undone']);
+  if (!really) return;
   var xhr = new XMLHttpRequest();
   xhr.open('GET', BASE_PATH + '/deleteComment.php?id=' + id + '&song=' + songId);
   xhr.send();

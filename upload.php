@@ -6,18 +6,10 @@ if (!logged_in()) {
   header('Location: index.php');
   exit();
 }
+$title = $trans['upload sound'];
 ?>
-<!DOCTYPE html>
-<html lang="<?=$lang?>">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?=$trans['upload sound']?></title>
-<link rel="stylesheet" href="<?=BASE_PATH?>/css/main.css">
-</head>
-<body>
-<?php include 'login.php'; ?>
-<h1><?=$trans['upload sound']?></h1>
+<?php include 'header.php'; ?>
+<h1><?=$title?></h1>
 <hr>
 <form method="POST" action="uploadHelper.php" enctype="multipart/form-data">
 <p>
@@ -35,4 +27,4 @@ if (!logged_in()) {
 <button type="submit"><?=$trans['ok']?></button>
 </form>
 <hr>
-<?php include 'c.php';
+<?php include 'footer.php';

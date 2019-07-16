@@ -26,7 +26,8 @@ $title = $f ? $name : $trans['recording not found'];
   <span class="time"><?= $f['date'] ?></span>
 </div>
 <?php if ($user === $f['user']) { ?>
-<a href="deleteSong.php?id=<?=$_GET['id']?>"><?=$trans['delete']?></a>
+<a onclick="return confirm(Translation['really want to delete song?']+Translation['cannot be undone'])"
+  href="deleteSong.php?id=<?=$_GET['id']?>"><?=$trans['delete']?></a>
 <?php } ?>
 <hr>
 <p><?= htmlspecialchars($f['description']) ?></p>

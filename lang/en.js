@@ -7,3 +7,4 @@ Translation['comment too fast'] = 'You are posting comments too quickly';
 Translation['really want to delete comment?'] = 'Do you really want to delete this comment?';
 Translation['really want to delete song?'] = 'Do you really want to delete this sound?';
 Translation['cannot be undone'] = 'This action cannot be undone.';
+Translation['comment failed'] = 'Comment failed to post!';

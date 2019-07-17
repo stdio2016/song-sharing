@@ -45,13 +45,15 @@ $title = $f ? $name : $trans['recording not found'];
 </audio>
 <!--[if gte IE 8]><!-->
 <h2><?=$trans['comment']?></h2>
+<div id="lstComment">
+</div>
   <?php if (isset($_SESSION['songs/user'])) { ?>
 
 <script src="<?=BASE_PATH?>/js/validate.js" charset="utf-8"></script>
 <form id='cmt' action="makeComment.php" method="post" onsubmit="return checkNoEmptyComment(event)">
   <input name='song' type="hidden" value='<?= $_GET['id'] ?>'>
-  <textarea name='comment' maxlength="1000"></textarea><br>
-  <button type="submit"><?=$trans['ok']?></button>
+  <textarea name='comment' maxlength="1000" placeholder="<?=$trans['enter your comment']?>"></textarea><br>
+  <button type="submit" name='ok'><?=$trans['ok']?></button>
 </form>
   <?php } else { ?>
 
@@ -62,8 +64,6 @@ $title = $f ? $name : $trans['recording not found'];
 <!--[if IE]>
 <p><?=$trans['you are using old and unsupported ie']?></p>
 <![endif]-->
-<div id="lstComment">
-</div>
 <script src="<?=BASE_PATH?>/js/asyncComment.js" charset="utf-8"></script>
 <?php } ?>
 <hr>

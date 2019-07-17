@@ -14,5 +14,35 @@ function checkNoEmptyComment(event) {
     return false;
   }
   localStorage.songs_RateLimit = +new Date();
-  return true;
+  submitComment(target);
+  return false;
+}
+
+function submitComment(form) {
+  var cmt = form.comment.value;
+  var song = form.song.value;
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", BASE_PATH + "/makeComment.php");
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.withCredentials = true;
+  xhr.timeout = 10000;
+  form.ok.disabled = true;
+  xhr.onreadystatechange = function () {
+    if(xhr.readyState === 4) {
+      if (xhr.status !== 200) {
+        alert(Translation['comment failed']);
+      }
+      else {
+        form.comment.value = "";
+      }
+      form.ok.disabled = false;
+      getNewComments();
+    }
+  }
+  xhr.ontimeout = function () {
+    form.ok.disabled = false;
+    alert(Translation['comment failed']);
+    getNewComments();
+  };
+  xhr.send("song="+song+"&comment="+encodeURIComponent(cmt));
 }

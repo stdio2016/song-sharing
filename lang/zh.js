@@ -7,3 +7,4 @@ Translation['comment too fast'] = '你留言太快了';
 Translation['really want to delete comment?'] = '你真的想删除这个留言吗？';
 Translation['really want to delete song?'] = '你真的想删除这个声音吗？';
 Translation['cannot be undone'] = '这个动作无法复原';
+Translation['comment failed'] = '留言失败！';

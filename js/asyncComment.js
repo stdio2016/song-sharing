@@ -1,6 +1,7 @@
 var lastCommentId = 0;
 var currentFloor = 1;
 var username = username;
+var commentTimeoutId = 0;
 var _GET = {};
 (function () {
   var search = location.search.substring(1).split('&');
@@ -21,11 +22,17 @@ function getNewComments() {
         var s = JSON.parse(resp);
         appendComments(s);
       }
-      setTimeout(getNewComments, 10000);
+      if (commentTimeoutId) {
+        clearTimeout(commentTimeoutId);
+      }
+      commentTimeoutId = setTimeout(getNewComments, 10000);
     }
   };
   xhr.onerror = function () {
-    setTimeout(getNewComments, 10000);
+    if (commentTimeoutId) {
+      clearTimeout(commentTimeoutId);
+    }
+    commentTimeoutId = setTimeout(getNewComments, 10000);
   };
   xhr.open('GET', BASE_PATH + '/comment.php?idafter=' + lastCommentId + '&song=' + songId);
   xhr.send();

@@ -24,7 +24,7 @@ $title = $trans['upload sound'];
 <p><audio id='tryAudio' controls></audio></p>
 <p>
   <label for="description"><?=$trans['description:']?></label><br>
-  <textarea name="description" rows="8" style="width:100%;max-width:600px;"></textarea>
+  <textarea name="description" rows="8"></textarea>
 </p>
 <button type="submit"><?=$trans['ok']?></button>
 </form>

@@ -16,7 +16,7 @@ catch (Exception $x) {
 }
 
 function getLang() {
-  $supported_language = ['en', 'zh-tw', 'zh'];
+  $supported_language = ['en', 'zh-tw', 'zh', 'zh-hant', 'zh-hans'];
   $langs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
   $langs = array_map(function ($a) {
     $i = strpos($a, ";");
@@ -40,6 +40,9 @@ function getLang() {
   if (!in_array($lang, $supported_language)) {
     $lang = 'en';
   }
+  // special case for zh lang
+  if ($lang == 'zh-hans') $lang = 'zh';
+  if ($lang == 'zh-hant') $lang = 'zh-tw';
   return $lang;
 }
 

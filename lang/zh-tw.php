@@ -32,4 +32,4 @@ $trans['upload too big'] = '上傳的檔案太大';
 $trans['delete'] = '刪除';
 $trans['delete success'] = '刪除成功';
 $trans['not audio file'] = '這不是聲音檔';
-$trans['audio restriction'] = '聲音檔必須小於 8MB 且只能是 OGG、MP3、WAV 檔';
+$trans['audio restriction'] = '聲音檔必須小於 2MB 且只能是 OGG、MP3、WAV 檔';

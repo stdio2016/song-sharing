@@ -12,7 +12,7 @@ if (!$_POST['name']) {
 }
 $file = $_FILES['file'];
 if ($file['error'] !== 0) {
-  $_SESSION['songs/msg'] = $trans['upload failed'];
+  $_SESSION['songs/msg'] = $trans['upload too big'];
   header('Location: index.php');
   exit();
 }
@@ -40,14 +40,11 @@ $id = $db->lastInsertId();
 $sql = "UPDATE sounds SET file = :file where id = :id";
 $query = $db->prepare($sql);
 $query->execute(array(':file' => $id, ':id' => $id));
-if (move_uploaded_file($file['tmp_name'], "files/$id.$extension")) {
+if (move_uploaded_file($file['tmp_name'], "files/_$id.$extension")) {
   $_SESSION['songs/msg'] = $trans['upload success'];
-  if ($extension !== 'mp3') {
-    shell_exec("ffmpeg  -i files/$id.$extension  -codec:a libmp3lame -b:a 128k  files/$id.mp3");
-  }
-  if ($extension !== 'ogg') {
-    shell_exec("ffmpeg  -i files/$id.$extension  -b:a 128k  files/$id.ogg");
-  }
+  shell_exec("ffmpeg  -i files/_$id.$extension  -codec:a libmp3lame -t 10:00 files/$id.mp3");
+  shell_exec("ffmpeg  -i files/_$id.$extension  -t 10:00 files/$id.ogg");
+  unlink("files/_$id.$extension");
   header('Location: index.php');
   exit();
 }

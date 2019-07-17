@@ -32,4 +32,4 @@ $trans['upload too big'] = 'Upload file too big';
 $trans['delete'] = 'Delete';
 $trans['delete success'] = 'Delete success';
 $trans['not audio file'] = 'This is not an audio file';
-$trans['audio restriction'] = 'Audio file must be smaller than 8MB and can only be MP3, OGG, WAV';
+$trans['audio restriction'] = 'Audio file must be smaller than 2MB and can only be MP3, OGG, WAV';

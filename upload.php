@@ -18,7 +18,7 @@ $title = $trans['upload sound'];
 </p>
 <p>
   <label for="file"><?=$trans['file:']?></label>
-  <input type="file" name="file" accept="audio/*" oninput="tryListen()">
+  <input type="file" name="file" accept=".ogg,.mp3,.wav,.flac,.m4a" oninput="tryListen()">
 </p>
 <p><?=$trans['audio restriction']?></p>
 <p><audio id='tryAudio' controls></audio></p>

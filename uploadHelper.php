@@ -24,7 +24,8 @@ if ($mime !== 'audio' && $mime !== 'video') {
   exit();
 }
 $extension = strtolower(pathinfo(basename($file['name']), PATHINFO_EXTENSION));
-if ($extension !== 'ogg' && $extension !== 'm4a' && $extension !== 'wav' && $extension !== 'mp3') {
+if ($extension !== 'ogg' && $extension !== 'm4a' && $extension !== 'wav' && $extension !== 'mp3'
+  && $extension !== 'flac') {
   $_SESSION['songs/msg'] = $trans['not audio file'];
   header('Location: index.php');
   exit();
@@ -42,8 +43,8 @@ $query = $db->prepare($sql);
 $query->execute(array(':file' => $id, ':id' => $id));
 if (move_uploaded_file($file['tmp_name'], "files/_$id.$extension")) {
   $_SESSION['songs/msg'] = $trans['upload success'];
-  shell_exec("ffmpeg  -i files/_$id.$extension  -codec:a libmp3lame -t 10:00 files/$id.mp3");
-  shell_exec("ffmpeg  -i files/_$id.$extension  -t 10:00 files/$id.ogg");
+  shell_exec("ffmpeg  -i files/_$id.$extension  -codec:a libmp3lame -vn -t 10:00 files/$id.mp3");
+  shell_exec("ffmpeg  -i files/_$id.$extension  -codec:a libvorbis  -vn -t 10:00 files/$id.ogg");
   unlink("files/_$id.$extension");
   header('Location: index.php');
   exit();

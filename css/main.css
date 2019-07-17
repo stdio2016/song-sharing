@@ -21,14 +21,21 @@ html.volatile-bg {
   white-space: pre-wrap;
   word-break: break-all;
 }
+.comment > .myicon {
+  margin-right: 2px;
+}
 .comment > .floor {
-  margin-right: 20px;
+  margin-right: 10px;
 }
-.comment > .time {
-  margin-right: 20px;
+span.space {
+  margin-left: 30px;
 }
-.author > .time {
-  border-left: 1px solid gray;
-  margin-left: 20px;
-  padding-left: 20px;
+.myicon {
+  height: 16px;
+  width: 16px;
+  vertical-align: middle;
+}
+.need-width {
+  display: inline-block;
+  min-width: 50px;
 }

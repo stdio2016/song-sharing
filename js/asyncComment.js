@@ -43,6 +43,13 @@ function createSpan(txt, cls) {
   return s;
 }
 
+function createIcon(src) {
+  var img = new Image(16, 16);
+  img.className = 'myicon';
+  img.src = src;
+  return img;
+}
+
 function deleteComment(id) {
   var really = confirm(Translation['really want to delete comment?'] + ' ' +
     Translation['cannot be undone']);
@@ -90,13 +97,16 @@ function appendComments(json) {
       div.appendChild(createSpan(Translation['comment deleted'], 'deleted'));
     }
     else {
+      div.appendChild(createIcon(BASE_PATH+'/image/user.png'));
       div.appendChild(createSpan(json[i].user, 'username'));
       var cmt = document.createElement('div');
       cmt.className = 'comment-text';
       setText(cmt, json[i].comment);
       div.appendChild(cmt);
+      div.appendChild(createIcon(BASE_PATH+'/image/time.png'));
       div.appendChild(createSpan(convertDate(json[i].time), 'time'));
       if (json[i].user === username) {
+        div.appendChild(createSpan(' ', 'space'));
         var del = document.createElement('a');
         del.href = 'javascript:deleteComment(' + json[i].id + ')';
         setText(del, Translation['delete']);

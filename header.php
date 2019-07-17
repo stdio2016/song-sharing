@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="<?=BASE_PATH?>/css/main.css">
 <script src="<?=BASE_PATH?>/lang/<?=$lang?>.js" charset="utf-8"></script>
 </head>
-
+<body>
 <?php
 if (isset($_SESSION['songs/msg'])) {
   echo "<p>" . $_SESSION['songs/msg'] . "</p>\n";

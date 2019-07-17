@@ -1,7 +1,7 @@
 <?php
 $mypath = 'index.php';
 require_once 'b.php';
-$sql = "SELECT id, name, `date` FROM sounds";
+$sql = "SELECT id, name, `date`, user FROM sounds";
 $query = $db->prepare($sql);
 $query->execute();
 $names = $query->fetchAll();
@@ -19,11 +19,14 @@ $title = $trans['record list'];
 <ul>
 <?php foreach ($names as $f) { ?>
   <li>
-    <p>
-      <a href='play.php?id=<?=$f['id']?>'><span><?= htmlspecialchars($f['name']) ?></span></a>
-      <br>
-      <span><?=$trans['time:']?><?=$f['date']?></span>
-    </p>
+    <a href='play.php?id=<?=$f['id']?>' class='need-width'><span><?= htmlspecialchars($f['name']) ?></span></a>
+    <div class="author">
+      <img class="myicon" src="<?=BASE_PATH?>/image/user.png">
+      <span class="username"><?= $f['user'] ?></span>
+      <span class="space"></span>
+      <img class="myicon" src="<?=BASE_PATH?>/image/time.png">
+      <span class="time"><?= $f['date'] ?></span>
+    </div>
   </li>
 <?php } ?>
 </ul>

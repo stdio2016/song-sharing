@@ -22,7 +22,10 @@ $title = $f ? $name : $trans['recording not found'];
 <?php } else { ?>
 <h1><?= $name ?></h1>
 <div class="author">
+  <img class="myicon" src="<?=BASE_PATH?>/image/user.png">
   <span class="username"><?= $f['user'] ?></span>
+  <span class="space"></span>
+  <img class="myicon" src="<?=BASE_PATH?>/image/time.png">
   <span class="time"><?= $f['date'] ?></span>
 </div>
 <?php if ($user === $f['user']) { ?>

@@ -62,7 +62,7 @@ function deleteComment(id) {
     Translation['cannot be undone']);
   if (!really) return;
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', BASE_PATH + '/deleteComment.php?id=' + id + '&song=' + songId);
+  xhr.open('DELETE', BASE_PATH + '/deleteComment.php?id=' + id + '&song=' + songId);
   xhr.send();
   var d = document.getElementById('comment_' + id);
   var e = d.firstChild;

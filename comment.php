@@ -2,7 +2,7 @@
 // for AJAX
 $no_translation = true;
 if (!isset($_GET['idafter']) || !isset($_GET['song'])) {
-  header("Location: index.php");
+  http_response_code(400);
   exit();
 }
 require_once 'b.php';
@@ -26,4 +26,5 @@ foreach ($comments as &$c) {
   }
 }
 unset($c);
+header("Content-type: application/json; charset=UTF-8");
 echo json_encode($comments, JSON_UNESCAPED_UNICODE);

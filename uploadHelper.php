@@ -49,6 +49,6 @@ if (move_uploaded_file($file['tmp_name'], "files/_$id.$extension")) {
   header('Location: index.php');
   exit();
 }
-$_SESSION['songs/msg'] = $trans['upload failed'];
+$_SESSION['songs/msg'] = $trans['upload failed'].'(admin, please set permission of files folder)';
 header('Location: index.php');
 exit();

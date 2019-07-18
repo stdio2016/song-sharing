@@ -4,7 +4,7 @@ RewriteEngine on
 RewriteRule ^(en|zh|zh-tw)/(.*)$  $2?lang=$1 [QSA]
 
 RewriteRule \.(htaccess|htpasswd)$  404.php
-RewriteRule ^(b|header|footer|lib).php$ 404.php [L,QSA]
+RewriteRule ^(b|header|footer|config)\.php|schema\.sql$ 404.php [L,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

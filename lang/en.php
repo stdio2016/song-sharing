@@ -34,3 +34,6 @@ $trans['delete success'] = 'Delete success';
 $trans['not audio file'] = 'This is not an audio file';
 $trans['audio restriction'] = 'Audio file must be smaller than 2MB and can only be MP3, OGG, WAV';
 $trans['enter your comment'] = 'Enter your comment...';
+$trans['edit'] = 'Edit';
+$trans['edit sound'] = 'Edit sound';
+$trans['edit success'] = 'Edit success';

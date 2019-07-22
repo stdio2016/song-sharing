@@ -44,3 +44,4 @@ $trans['no account? please'] = "沒有帳號嗎？請";
 $trans['user or pass error'] = '使用者名稱或密碼錯誤，請重新輸入';
 $trans['user registered'] = '使用者名稱已被註冊';
 $trans['password differs'] = "兩次輸入密碼不相同";
+$trans['password restriction'] = '密碼只能使用英文字母和數字的組合，最多20個字';

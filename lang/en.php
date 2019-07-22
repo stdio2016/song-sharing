@@ -44,3 +44,4 @@ $trans['no account? please'] = "Don't have an account? Please ";
 $trans['user or pass error'] = 'Username or password is wrong. Please try again';
 $trans['user registered'] = 'Username has already been taken';
 $trans['password differs'] = "Password confirmation doesn't match the password";
+$trans['password restriction'] = 'Password can only contain letters and digits, and cannot be longer than 20 characters';

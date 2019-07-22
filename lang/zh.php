@@ -43,3 +43,4 @@ $trans['register'] = '注册';
 $trans['no account? please'] = "没有帐号吗？请";
 $trans['user or pass error'] = '用户名或密码错误，请重新输入';
 $trans['user registered'] = '用户名已被注册';
+$trans['password differs'] = '两次输入密码不相同';

@@ -8,17 +8,40 @@ if (logged_in()) {
   header('Location:' . $_REQUEST['back']);
   exit();
 }
-if (isset($_POST['username'])) {
+if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['passwordAgain'])) {
   $test = preg_match("/^[A-Za-z0-9]{1,20}$/", $_POST['username']);
   if ($test != 1) {
     $_SESSION['songs/msg'] = $trans['username restriction'];
-    header('Location:' . $mypath);
-    exit();
+  }
+  else if ($_POST['password'] !== $_POST['passwordAgain']) {
+    $_SESSION['songs/msg'] = $trans['password differs'];
   }
   else {
-    $_SESSION['songs/user'] = $_POST['username'];
+    $sql = "SELECT * FROM account WHERE name=:name";
+    $query = $db->prepare($sql);
+    $query->execute(array(
+      ':name' => $_POST['username']
+    ));
+    $f = $query->fetch();
+    if (is_array($f)) {
+      $_SESSION['songs/msg'] = $trans['user registered'];
+    }
+    else {
+      $sql = "INSERT INTO account(name,password) VALUES(:name, :hash)";
+      $query = $db->prepare($sql);
+      $f = $query->execute(array(
+        ':name' => $_POST['username'],
+        ':hash' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+      ));
+      if ($f === True) {
+        $_SESSION['songs/user'] = $_POST['username'];
+        header('Location:' . $_REQUEST['back']);
+        exit();
+      }
+      $_SESSION['songs/msg'] = 'Internal error has occured';
+    }
   }
-  header('Location:' . $_REQUEST['back']);
+  header('Location:' . $mypath);
   exit();
 }
 if ($_SERVER['REQUEST_METHOD'] != 'GET') {

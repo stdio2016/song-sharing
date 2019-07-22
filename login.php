@@ -8,17 +8,29 @@ if (logged_in()) {
   header('Location:' . $_REQUEST['back']);
   exit();
 }
-if (isset($_POST['username'])) {
+if (isset($_POST['username']) && isset($_POST['password'])) {
   $test = preg_match("/^[A-Za-z0-9]{1,20}$/", $_POST['username']);
   if ($test != 1) {
     $_SESSION['songs/msg'] = $trans['username restriction'];
-    header('Location:' . $mypath);
-    exit();
+    
   }
   else {
-    $_SESSION['songs/user'] = $_POST['username'];
+    $sql = "SELECT * FROM account WHERE name=:name";
+    $query = $db->prepare($sql);
+    $query->execute(array(
+      ':name' => $_POST['username']
+    ));
+    $f = $query->fetch(); 
+    if (is_array($f) && password_verify($_POST['password'], $f['password'])) {
+      $_SESSION['songs/user'] = $_POST['username'];
+      header('Location:' . $_REQUEST['back']);
+      exit();
+    }
+    else {
+      $_SESSION['songs/msg'] = $trans['user or pass error'];
+    }
   }
-  header('Location:' . $_REQUEST['back']);
+  header('Location:' . $mypath);
   exit();
 }
 if ($_SERVER['REQUEST_METHOD'] != 'GET') {

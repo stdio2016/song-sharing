@@ -19,7 +19,7 @@ $title = $trans['record list'];
 <ul>
 <?php foreach ($names as $f) { ?>
   <li>
-    <a href='play.php?id=<?=$f['id']?>' class='need-width'><span><?= htmlspecialchars($f['name']) ?></span></a>
+    <a href='play.php?id=<?=$f['id']?>' class='need-width user-text'><span><?= htmlspecialchars($f['name']) ?></span></a>
     <div class="author">
       <img class="myicon" src="<?=BASE_PATH?>/image/user.png">
       <span class="username"><?= $f['user'] ?></span>

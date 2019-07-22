@@ -20,7 +20,7 @@ $title = $f ? $name : $trans['recording not found'];
 <h1><?=$trans['recording not found']?></h1>
 <p><?=$trans['recording not found reason']?></p>
 <?php } else { ?>
-<h1><?= $name ?></h1>
+<h1 class='user-text'><?= $name ?></h1>
 <div class="author">
   <img class="myicon" src="<?=BASE_PATH?>/image/user.png">
   <span class="username"><?= $f['user'] ?></span>
@@ -34,7 +34,7 @@ $title = $f ? $name : $trans['recording not found'];
 <a href="editSong.php?id=<?=$_GET['id']?>"><?=$trans['edit']?></a>
 <?php } ?>
 <hr>
-<p><?= htmlspecialchars($f['description']) ?></p>
+<p class='user-text'><?= htmlspecialchars($f['description']) ?></p>
 <audio controls>
   <source src="<?=BASE_PATH?>/files/<?= $f['file'] ?>.ogg">
   <source src="<?=BASE_PATH?>/files/<?= $f['file'] ?>.m4a">

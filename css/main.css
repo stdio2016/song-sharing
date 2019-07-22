@@ -18,9 +18,11 @@ html.volatile-bg {
 }
 .comment-text {
   margin-left: 2em;
+}
+.user-text, .comment-text {
   white-space: pre-wrap;
   overflow-wrap: break-word;
-  word-break: break-word;
+  word-break: break-word;  
 }
 .comment > .myicon {
   margin-right: 2px;

@@ -1,15 +1,25 @@
 <?php
-$mypath = 'upload.php';
 require_once 'b.php';
 if (!logged_in()) {
   $_SESSION['songs/msg'] = $trans['you must login to edit description'];
   header('Location: index.php');
   exit();
 }
+if (!isset($_REQUEST['id'])) {
+  http_response_code(400);
+  echo 'bad request';
+  exit();
+}
+$mypath = 'editSong.php?id='.$_REQUEST['id'];
 $sql = "SELECT user FROM sounds WHERE id = :id";
 $query = $db->prepare($sql);
 $query->execute(array(':id' => $_REQUEST['id']));
 $f = $query->fetch();
+if (!$f) {
+  http_response_code(404);
+  echo 'song not found';
+  exit();
+}
 if ($f['user'] != $_SESSION['songs/user']) {
   http_response_code(403);
   echo 'permission denied';

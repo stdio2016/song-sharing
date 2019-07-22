@@ -34,3 +34,6 @@ $trans['delete success'] = '删除成功';
 $trans['not audio file'] = '这不是声音档';
 $trans['audio restriction'] = '声音档必须小于 2MB 且只能是 OGG、MP3、WAV 档';
 $trans['enter your comment'] = '输入您的留言...';
+$trans['edit'] = '编辑';
+$trans['edit sound'] = '编辑声音';
+$trans['edit success'] = '编辑成功';

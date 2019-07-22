@@ -67,5 +67,8 @@ $title = $f ? $name : $trans['recording not found'];
 <![endif]-->
 <script src="<?=BASE_PATH?>/js/asyncComment.js" charset="utf-8"></script>
 <?php } ?>
+<p>
+<a href='<?=BASE_PATH.'/'.$lang?>/index.php'><?=$trans['go to homepage']?></a>
+</p>
 <hr>
 <?php require 'footer.php';

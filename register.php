@@ -3,7 +3,7 @@ require_once 'b.php';
 if (!isset($_REQUEST['back'])) {
   $_REQUEST['back'] = 'index.php';
 }
-$mypath = 'login.php?back='.urlencode($_REQUEST['back']);
+$mypath = 'register.php?back='.urlencode($_REQUEST['back']);
 if (logged_in()) {
   header('Location:' . $_REQUEST['back']);
   exit();
@@ -26,13 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] != 'GET') {
   http_response_code(400);
   exit();
 }
-$title = $trans['login'];
+$title = $trans['register'];
 $login_page = True;
 ?>
 <?php include_once 'header.php'; ?>
 <h1><?=$title?></h1>
 <hr>
-<form action="login.php" method="POST">
+<form action="register.php" method="POST">
   <p>
     <label for="username"><?=$trans['username:']?></label>
     <input name="username" maxlength="20">
@@ -42,13 +42,13 @@ $login_page = True;
     <input name="password" type='password' maxlength="20">
   </p>
   <p>
-    <button type="submit"><?=$trans['login']?></button>
+    <label for="passwordAgain"><?=$trans['password again:']?></label>
+    <input name="passwordAgain" type='password' maxlength="20">
+  </p>
+  <p>
+    <button type="submit"><?=$trans['register']?></button>
   </p>
   <input type="hidden" name="back" value="<?=htmlspecialchars($_GET['back'])?>">
 </form>
-<p>
-  <?=$trans['no account? please']?>
-  <a href="register.php?back=<?=htmlspecialchars(urlencode($_GET['back']))?>"><?=$trans['register']?></a>
-</p>
 <hr>
 <?php include_once 'footer.php';

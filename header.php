@@ -23,17 +23,12 @@ if (isset($_SESSION['songs/user'])) { ?>
 <script>
 var username = "<?=$_SESSION['songs/user']?>";
 </script>
-<?php } else { ?>
+<?php } else if (!isset($login_page)) { ?>
 <script>
 var username = "";
 </script>
-<form action="login.php" method="POST"><p>
-  <p><?=$trans['you are not logged in']?><br>
-    <?=$trans['type username:']?><input type="text" maxlength="20" width="20" name="username">
-    <button type="submit"><?=$trans['login']?></button>
-  </p>
-  <input type="hidden" name="back" value="<?=htmlspecialchars($_SERVER['REQUEST_URI'])?>">
-</form>
+<a href="login.php?back=<?=htmlspecialchars(urlencode($_SERVER['REQUEST_URI']))?>"><?=$trans['login']?></a>
+<a href="register.php?back=<?=htmlspecialchars(urlencode($_SERVER['REQUEST_URI']))?>"><?=$trans['register']?></a>
 <?php }
 if (!isset($mypath)) $mypath = 'index.php';
 $mypath = htmlspecialchars($mypath);

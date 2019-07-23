@@ -44,6 +44,9 @@ $title = $f ? $name : $trans['recording not found'];
   <embed src="<?=BASE_PATH?>/files/<?= $f['file'] ?>.mp3" width='250' height='40'
     autostart="False">
 </audio>
+<p>
+<a href="helpTag.php?id=<?=$_GET['id']?>">Help me tag sound</a>
+</p>
 <!--[if gte IE 8]><!-->
 <h2><?=$trans['comment']?></h2>
 <div id="lstComment">

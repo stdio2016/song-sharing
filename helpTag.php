@@ -30,15 +30,18 @@ $title = $f ? "Tag ".$name : $trans['recording not found'];
 var filename = <?=json_encode($f['file'])?>;
 </script>
 <p style="margin: 0px 10px;">
-  <canvas id="canvas" class="visualizer" height="60"></canvas>
+  <canvas id="canvas" class="visualizer" height="60"></canvas><br>
+  <canvas id="canvasMark" class="marker" height="60"></canvas>
 </p>
 <p>
   <button type="button" onclick="zoomIn()">Zoom in</button>
   <button type="button" onclick="zoomOut()">Zoom out</button>
+  <button type="button" onclick="selectVisible()">Select visible</button>
   <button type="button" onclick="playVisible()">Play</button>
   <button type="button" onclick="playSelected()">Play selected</button>
   <button type="button" onclick="stopSound()">Stop</button>
 </p>
+<script src="<?=BASE_PATH?>/js/waveform.js" charset="utf-8"></script>
 <script src="<?=BASE_PATH?>/js/helpTag.js" charset="utf-8"></script>
 <?php } ?>
 <p>

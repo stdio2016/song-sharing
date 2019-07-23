@@ -25,7 +25,6 @@ function resumeContext() {
   }
 }
 
-var soundBuf = null;
 function loadSound(where, success, fail) {
   var req = new XMLHttpRequest();
 
@@ -47,10 +46,6 @@ function loadSound(where, success, fail) {
   req.send();
 }
 
-function soundLoaded(buf) {
-  soundBuf = buf;
-}
-
 addEventListener('load', function () {
   // Chrome learns the "bad" part of Safari!
   if (audioCtx && audioCtx.state === "suspended") {
@@ -64,7 +59,7 @@ addEventListener('load', function () {
   var extensions = ['.ogg','.mp3'];
   function tryNext() {
     if (i < extensions.length) {
-      loadSound(BASE_PATH + '/files/' + filename + extensions[i], soundLoaded, tryNext);
+      loadSound(BASE_PATH + '/files/' + filename + extensions[i], decodeSuccess, tryNext);
       i++;
     }
     else {

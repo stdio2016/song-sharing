@@ -12,6 +12,8 @@ var yAxisZoom = 1;
 var playStartTime = 0;
 var playingSound = false;
 var selected = {start: 0.5, end: 1};
+var marks = [];
+var timeUnit = 0.1;
 
 function drawLoading() {
   canvas.width = canvas.clientWidth;
@@ -73,13 +75,20 @@ function buildWaveArray() {
     range = Math.max(range, Math.abs(arr[i]));
   }
   yAxisZoom = Math.min(1 / range, 1000);
+  var n = Math.floor(soundBuffer.duration / timeUnit) + 1;
+  marks = [];
+  for (var i = 0; i < n; i++) {
+    marks.push(" ");
+  }
+  marks.push("-");
+  marks.push("-");
 }
 
 var mouse = {x: 0, y: 0, vx: 0, px: 0, dragging: false, t: 0, dragBar: 0};
 var visualizeCallbackId = 0;
 
 function needUpdate(must) {
-  if (playingSound || zoomPanV || mouse.dragging || mouse.dragBar || must) {
+  if (playingSound || zoomPanV || must) {
     if (!visualizeCallbackId) {
       visualizeCallbackId = requestAnimationFrame(redraw);
     }
@@ -117,6 +126,11 @@ function canvasPosToTime(pos) {
 
 function redraw() {
   canvas.width = canvas.clientWidth;
+  if (!soundBuffer) {
+    drawLoading();
+    visualizeCallbackId = 0;
+    needUpdate();
+  }
   var width = canvas.width;
   var height = canvas.height;
   
@@ -166,6 +180,7 @@ function redraw() {
     ctx.fillStyle = 'blue';
     ctx.fillRect(x2-2, 0, 4, height);
   }
+  drawMarks();
   visualizeCallbackId = 0;
   needUpdate();
 }
@@ -234,23 +249,6 @@ function playVisible() {
   playRange(zoomPan * unit, canvas.width * unit);
 }
 
-function addRange() {
-  promptBox('Name for this segment', 'segment ' + segments.size, function (name) {
-    if (!name) return ;
-    var seg = {start: selected.start, end: selected.end, name: name};
-    addSegmentInterface(seg);
-  });
-}
-function editRange() {
-  if (editingSegment) {
-    editingSegment.start = selected.start;
-    editingSegment.end = selected.end;
-    editingSegment = null;
-  }
-  lblStatus.textContent = '';
-  btnEditRange.hidden = true;
-}
-
 function canvasMouseDown(e){
   e.preventDefault();
   if (e.button == 0) {
@@ -292,7 +290,7 @@ function canvasMouseMove(e){
     fixSelectRange();
   }
   mouse.x = newx;
-  needUpdate();
+  needUpdate(true);
 }
 function canvasMouseUp(e){
   e.preventDefault();
@@ -301,11 +299,8 @@ function canvasMouseUp(e){
     else zoomPanV = 0;
     mouse.dragging = false;
   }
-  if (e.button == 0) {
-    mouse.dragBar = 0;
-  }
   fixSelectRange(true);
-  needUpdate();
+  needUpdate(true);
 }
 canvas.addEventListener('mousedown', canvasMouseDown);
 canvas.addEventListener('mousemove', canvasMouseMove);
@@ -358,3 +353,106 @@ canvas.addEventListener('touchstart', canvasTouchStart, false);
 canvas.addEventListener('touchmove', canvasTouchMove, false);
 canvas.addEventListener('touchend', canvasTouchEnd, false);
 window.addEventListener('resize', needUpdate.bind(true));
+
+var selections = [sel1,sel2,sel3,sel4,sel5,sel6,sel7];
+var markName = {
+  M: ['Modal', '#f00'],
+  I: ['Mix', '#a70'],
+  H: ['Head', '#070'],
+  F: ['False', '#07b'],
+  Y: ['Fry', '#707'],
+  '-': ['-', 'white'],
+  ' ': ['unknow', 'black']
+}
+function markSelected() {
+  var t0 = Math.floor(selected.start / timeUnit);
+  var t1 = Math.ceil(selected.end / timeUnit);
+  var cho = " ";
+  for (var i = 0; i < selections.length; i++) {
+    if (selections[i].checked) {
+      cho = selections[i].value;
+    }
+  }
+  for (var i = t0; i < t1; i++) {
+    marks[i] = cho;
+  }
+  needUpdate(true);
+}
+
+function drawMarks() {
+  var smpRate = soundBuffer ? soundBuffer.sampleRate : audioCtx.sampleRate;
+  var i = Math.floor(canvasPosToTime(0) / timeUnit);
+  var ctx = canvasMark.getContext('2d');
+  var dist = smpRate / Math.pow(2, zoomLevel+1) * timeUnit;
+  var x = timeToCanvasPos(i * timeUnit);
+  var width = canvasMark.clientWidth;
+  var height = canvasMark.clientHeight;
+  canvasMark.width = width;
+  canvasMark.height = height;
+  ctx.font = height/1.5 + "px aries";
+  var toDraw = [];
+  var prev = null;
+  while (x < width) {
+    var type = marks[i];
+    if (type) {
+      var xx = Math.max(x, 0);
+      if (prev && prev.type === type) {
+        ;
+      }
+      else {
+        prev = {type: type, begin: xx};
+        toDraw.push(prev);
+      }
+    }
+    i += 1;
+    x += dist;
+  }
+  toDraw.push({type: '-', begin: x - dist});
+  for (var i = 1; i < toDraw.length; i++) {
+    var type = toDraw[i-1].type;
+    var x1 = toDraw[i-1].begin;
+    var x2 = toDraw[i].begin;
+    ctx.fillStyle = markName[type][1];
+    ctx.fillRect(x1, 0, x2, height);
+    var txt = markName[type][0];
+    var mw = ctx.measureText(txt).width;
+    if (x2 > x1 + mw) {
+      ctx.fillStyle = 'white';
+      ctx.fillText(txt, x1, height * (1/2 + 1/6*0.6));
+    }
+  }
+}
+
+function canvasMarkMouseMove(e) {
+  e.preventDefault();
+  var newx = e.offsetX;
+  var cho = " ";
+  for (var i = 0; i < selections.length; i++) {
+    if (selections[i].checked) {
+      cho = selections[i].value;
+    }
+  }
+  if ((e.buttons & 1) && true) {
+    var t = Math.floor(canvasPosToTime(newx) / timeUnit);
+    if (t < marks.length - 2) {
+      marks[t] = cho;
+      needUpdate(true);
+    }
+  }
+}
+function canvasMarkTouchStart(e) {
+  e.preventDefault();
+}
+function canvasMarkTouchMove(e) {
+  canvasMarkMouseMove({
+    timeStamp: e.timeStamp,
+    preventDefault: ignore,
+    buttons: 1,
+    offsetX: touch[0].clientX - canvas.offsetLeft,
+    offsetY: touch[0].clientY - canvas.offsetTop
+  });
+}
+canvasMark.addEventListener('mousedown', canvasMarkMouseMove, false);
+canvasMark.addEventListener('mousemove', canvasMarkMouseMove, false);
+canvasMark.addEventListener('touchstart', canvasMarkTouchStart, false);
+canvasMark.addEventListener('touchmove', canvasMarkTouchMove, false);

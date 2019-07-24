@@ -54,6 +54,10 @@ canvas.visualizer {
 }
 canvas.marker {
   width: 100%;
-  height: 15px;
+  height: 20px;
   background-color: black;
+}
+p.visualizer {
+  margin-left: 10px;
+  margin-right: 10px;
 }

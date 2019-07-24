@@ -442,14 +442,25 @@ function canvasMarkMouseMove(e) {
 }
 function canvasMarkTouchStart(e) {
   e.preventDefault();
+  var touch = e.touches;
+  if (touch.length != 1) {
+    nofire = true;
+    return;
+  }
+  else{
+    nofire = false;
+  }
 }
 function canvasMarkTouchMove(e) {
+  e.preventDefault();
+  var touch = e.touches;
+  if (nofire || touch.length != 1) return;
   canvasMarkMouseMove({
     timeStamp: e.timeStamp,
     preventDefault: ignore,
     buttons: 1,
-    offsetX: touch[0].clientX - canvas.offsetLeft,
-    offsetY: touch[0].clientY - canvas.offsetTop
+    offsetX: touch[0].clientX - canvasMark.offsetLeft,
+    offsetY: touch[0].clientY - canvasMark.offsetTop
   });
 }
 canvasMark.addEventListener('mousedown', canvasMarkMouseMove, false);

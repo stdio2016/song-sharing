@@ -1,5 +1,5 @@
 <?php
-$mypath = 'play.php?id=' . $_GET['id'];
+$mypath = 'helpTag.php?id=' . $_GET['id'];
 require_once 'b.php';
 $sql = "SELECT name, `date`, file, description, user FROM sounds where id = :id";
 $query = $db->prepare($sql);

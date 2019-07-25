@@ -71,3 +71,6 @@ p.visualizer {
 .clip.editing{
   background: cyan;
 }
+.segment-name {
+  width: 90px;
+}

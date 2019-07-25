@@ -30,8 +30,8 @@ var author = <?=json_encode($f['user'])?>;
 <?php if (!logged_in()) { ?>
 <p>You must be logged in to mark voice</p>
 <?php } ?>
-<button id="btnSave" onclick="saveSegments()">Save</button>
-<button id="btnSave" onclick="resetSegments()">Reset</button>
+<button id="btnSave" onclick="saveSegments()" disabled>Save</button>
+<button id="btnReset" onclick="resetSegments()">Reset</button>
 <p id=''>
   <span id="lblStatus"></span>
   <button type="button" id="btnEditRange" onclick="editRange()" hidden>Confirm</button>

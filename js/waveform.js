@@ -294,6 +294,7 @@ function addSegmentInterface(range) {
   var lbl = document.createElement("input");
   lbl.value = range.name;
   lbl.id = 'segmentName' + id;
+  lbl.className = 'segment-name';
   var btnEdit = document.createElement("button");
   btnEdit.textContent = "Edit";
   btnEdit.onclick = function () {

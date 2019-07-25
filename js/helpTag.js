@@ -68,3 +68,59 @@ addEventListener('load', function () {
   }
   tryNext();
 });
+
+function saveSegments() {
+  var arr = [];
+  for (var i in segments) {
+    var seg = segments[i];
+    arr.push({
+      start: seg.start,
+      end: seg.end,
+      name: seg.name,
+      type: document.getElementById('segmentType'+i).value
+    });
+  }
+  xhr = new XMLHttpRequest();
+  xhr.open('POST', 'mark.php');
+  var fd = new FormData();
+  fd.append('id', songId);
+  fd.append('marks', JSON.stringify(arr));
+  xhr.send(fd);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      alert('save success');
+    }
+    else {
+      alert('save failed!');
+    }
+  }
+  xhr.onerror = function () {
+    alert('save failed');
+  }
+}
+
+function loadTemplate() {
+  xhr = new XMLHttpRequest();
+  xhr.open('GET', BASE_PATH+'/mark.php?id='+songId+'&user='+author);
+  xhr.send();
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      initInterface(JSON.parse(xhr.response));
+    }
+  }
+}
+
+function loadSegments() {
+  xhr = new XMLHttpRequest();
+  xhr.open('GET', BASE_PATH+'/mark.php?id='+songId+'&user='+username);
+  xhr.send();
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      initInterface(JSON.parse(xhr.response));
+    }
+    else if (xhr.status === 404) {
+      loadTemplate();
+    }
+  }
+}
+loadSegments();

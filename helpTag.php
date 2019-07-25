@@ -24,6 +24,8 @@ $title = $f ? "Mark ".$name : $trans['recording not found'];
 <hr>
 <script>
 var filename = <?=json_encode($f['file'])?>;
+var songId = <?=json_encode($_GET['id'])?>;
+var author = <?=json_encode($f['user'])?>;
 </script>
 <?php if (!logged_in()) { ?>
 <p>You must be logged in to mark voice</p>

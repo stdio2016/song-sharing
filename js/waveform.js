@@ -332,6 +332,7 @@ function addSegmentInterface(range) {
   for (var i = 0; i < voiceRegisters.length; i++) {
     sel.options.add(new Option(voiceRegisters[i][0], voiceRegisters[i][1]));
   }
+  sel.value = range.type;
   item.id = "segment" + id;
   item.appendChild(lbl);
   item.appendChild(btnEdit);

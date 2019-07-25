@@ -11,7 +11,7 @@ $query->execute(array(':id' => $_GET['id']));
 $f = $query->fetch();
 $name = htmlspecialchars($f['name']);
 $user = isset($_SESSION['songs/user']) ? $_SESSION['songs/user'] : "";
-$title = $f ? "Tag ".$name : $trans['recording not found'];
+$title = $f ? "Mark ".$name : $trans['recording not found'];
 ?>
 <?php include 'header.php'; ?>
 <?php if (!$f) {
@@ -28,13 +28,15 @@ var filename = <?=json_encode($f['file'])?>;
 <?php if (!logged_in()) { ?>
 <p>You must be logged in to mark voice</p>
 <?php } ?>
+<button id="btnSave" onclick="saveSegments()">Save</button>
+<p id=''>
+  <span id="lblStatus"></span>
+  <button type="button" id="btnEditRange" onclick="editRange()" hidden>Confirm</button>
+  <button type="button" id="btnAddRange" onclick="addRange()" disabled>Add segment</button>
+</p>
 <p class="visualizer">
   Waveform: <br>
   <canvas id="canvas" class="visualizer" height="60"></canvas>
-</p>
-<p class="visualizer">
-  Marks: <br>
-  <canvas id="canvasMark" class="marker" height="60"></canvas>
 </p>
 <p>
   <button type="button" onclick="zoomIn()">Zoom in</button>
@@ -44,18 +46,8 @@ var filename = <?=json_encode($f['file'])?>;
   <button type="button" onclick="playSelected()">Play selected</button>
   <button type="button" onclick="stopSound()">Stop</button>
 </p>
-<form id='selReg'>
-  <span>Mark as voice register: </span>
-  <input name="selMark" type="radio" value="M" id="sel1"><label for="sel1">Modal voice</label>
-  <input name="selMark" type="radio" value="I" id="sel2"><label for="sel2">Mixed voice</label>
-  <input name="selMark" type="radio" value="H" id="sel3"><label for="sel3">Head voice</label>
-  <input name="selMark" type="radio" value="F" id="sel4"><label for="sel4">Falsetto</label>
-  <input name="selMark" type="radio" value="Y" id="sel5"><label for="sel5">Vocal fry</label>
-  <input name="selMark" type="radio" value="-" id="sel6"><label for="sel6">Not voice</label>
-  <input name="selMark" type="radio" value=" " id="sel7"><label for="sel7">Unknown</label>
-  <br>
-  <button type="button" onclick="markSelected()">Mark selection</button>
-</form>
+<section class="sound-clips">
+</section>
 <script src="<?=BASE_PATH?>/js/waveform.js" charset="utf-8"></script>
 <script src="<?=BASE_PATH?>/js/helpTag.js" charset="utf-8"></script>
 <?php } ?>

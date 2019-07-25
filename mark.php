@@ -64,7 +64,26 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   ));
   echo 'success';
 }
+else if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+  if (!logged_in()) {
+    echo 'login required';
+    http_response_code(403);
+    exit;
+  }
+  if (!isset($_GET['id'])) {
+    echo 'bad request';
+    http_response_code(400);
+    exit;
+  }
+  $sql = "DELETE FROM falsetto WHERE song=:song AND user=:user";
+  $query = $db->prepare($sql);
+  $query->execute(array(
+    ':song' => $_GET['id'],
+    ':user' => $_SESSION['songs/user']
+  ));
+  echo 'success';
+}
 else {
-  echo 'bad request';
-  http_response_code(400);
+  echo 'method not supported';
+  http_response_code(405);
 }

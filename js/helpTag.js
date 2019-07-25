@@ -99,13 +99,16 @@ function saveSegments() {
   }
 }
 
-function loadTemplate() {
+function loadTemplate(fail) {
   xhr = new XMLHttpRequest();
   xhr.open('GET', BASE_PATH+'/mark.php?id='+songId+'&user='+author);
   xhr.send();
   xhr.onload = function () {
     if (xhr.status === 200) {
       initInterface(JSON.parse(xhr.response));
+    }
+    else {
+      fail();
     }
   }
 }
@@ -119,8 +122,29 @@ function loadSegments() {
       initInterface(JSON.parse(xhr.response));
     }
     else if (xhr.status === 404) {
-      loadTemplate();
+      loadTemplate(function () {});
     }
   }
 }
 loadSegments();
+
+function resetSegments() {
+  if (!confirm('Really want to reset marks? '+Translation['cannot be undone'])) {
+    return;
+  }
+  if (!username) {
+    loadTemplate();
+    return;
+  }
+  xhr = new XMLHttpRequest();
+  xhr.open('DELETE', BASE_PATH+'/mark.php?id='+songId);
+  xhr.send();
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      loadTemplate();
+    }
+    else if (xhr.status === 404) {
+      alert('reset failed!');
+    }
+  }
+}

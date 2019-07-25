@@ -283,7 +283,7 @@ function editRange() {
   btnEditRange.hidden = true;
   if (highlightingSegment) {
     var g = document.getElementById("segment"+highlightingSegment);
-    g.classList.remove('editing');
+    if (g) g.classList.remove('editing');
   }
 }
 
@@ -299,7 +299,7 @@ function addSegmentInterface(range) {
   btnEdit.onclick = function () {
     if (highlightingSegment) {
       var g = document.getElementById("segment" + highlightingSegment);
-      g.classList.remove('editing');
+      if (g) g.classList.remove('editing');
     }
     lblStatus.textContent = 'Editing segment "'+lbl.value+'"';
     btnEditRange.hidden = false;
@@ -322,7 +322,7 @@ function addSegmentInterface(range) {
   btnDel.onclick = function () {
     confirmBox("Really want to delete this segment?", function (result) {
       if (result) {
-        delete segments[highlightingSegment];
+        delete segments[id];
         item.remove();
       }
     });

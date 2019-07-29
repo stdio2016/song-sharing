@@ -17,7 +17,10 @@ catch (Exception $x) {
 
 function getLang() {
   $supported_language = ['en', 'zh-tw', 'zh', 'zh-hant', 'zh-hans'];
-  $langs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+  $langs = [];
+  if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+    $langs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+  }
   $langs = array_map(function ($a) {
     $i = strpos($a, ";");
     if ($i !== false) {

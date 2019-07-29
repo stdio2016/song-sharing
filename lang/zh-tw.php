@@ -38,6 +38,7 @@ $trans['audio restriction'] = '聲音檔必須小於 2MB 且只能是 OGG、MP3�
 $trans['enter your comment'] = '輸入您的留言...';
 $trans['edit'] = '編輯';
 $trans['edit sound'] = '編輯聲音';
+$trans['you must login to edit description'] = '你必須先登入，才可以編輯描述';
 $trans['edit success'] = '編輯成功';
 $trans['register'] = '註冊';
 $trans['no account? please'] = "沒有帳號嗎？請";

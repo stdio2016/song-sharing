@@ -38,6 +38,7 @@ $trans['audio restriction'] = 'Audio file must be smaller than 2MB and can only 
 $trans['enter your comment'] = 'Enter your comment...';
 $trans['edit'] = 'Edit';
 $trans['edit sound'] = 'Edit sound';
+$trans['you must login to edit description'] = 'You must be logged in to edit description';
 $trans['edit success'] = 'Edit success';
 $trans['register'] = 'Register';
 $trans['no account? please'] = "Don't have an account? Please ";

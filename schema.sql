@@ -131,6 +131,7 @@ CREATE TABLE `sounds` (
   `file` varchar(80) NOT NULL,
   `description` text NOT NULL,
   `user` varchar(20) NOT NULL,
+  `views` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -141,7 +142,7 @@ CREATE TABLE `sounds` (
 
 LOCK TABLES `sounds` WRITE;
 /*!40000 ALTER TABLE `sounds` DISABLE KEYS */;
-INSERT INTO `sounds` VALUES (1,'音樂好難寫的伴奏','2019-07-15 21:45:53','1','這是我為了參加金 GO 盃而製作的音樂檔','stdio2016');
+INSERT INTO `sounds` VALUES (1,'音樂好難寫的伴奏','2019-07-15 21:45:53','1','這是我為了參加金 GO 盃而製作的音樂檔','stdio2016',0);
 /*!40000 ALTER TABLE `sounds` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -154,4 +155,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-25 13:55:15
+-- Dump completed on 2019-07-31 17:51:56

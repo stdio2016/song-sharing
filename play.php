@@ -1,12 +1,17 @@
 <?php
 $mypath = 'play.php?id=' . $_GET['id'];
 require_once 'b.php';
-$sql = "SELECT name, `date`, file, description, user FROM sounds where id = :id";
+$sql = "UPDATE sounds SET views = views + 1 where id = :id";
 $query = $db->prepare($sql);
 if (!isset($_GET['id'])) {
   header('Location: index.php');
   exit();
 }
+$query->execute(array(':id' => $_GET['id']));
+
+$sql = "SELECT name, `date`, file, description, user, views FROM sounds where id = :id";
+$query = $db->prepare($sql);
+
 $query->execute(array(':id' => $_GET['id']));
 $f = $query->fetch();
 $name = htmlspecialchars($f['name']);
@@ -27,6 +32,9 @@ $title = $f ? $name : $trans['recording not found'];
   <span class="space"></span>
   <img class="myicon" src="<?=BASE_PATH?>/image/time.png">
   <span class="time"><?= $f['date'] ?></span>
+  <span class="space"></span>
+  <img class="myicon" src="<?=BASE_PATH?>/image/eye.png">
+  <span class="views"><?= $f['views'] ?></span>
 </div>
 <?php if ($user === $f['user']) { ?>
 <a onclick="return confirm(Translation['really want to delete song?']+Translation['cannot be undone'])"

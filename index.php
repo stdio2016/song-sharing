@@ -1,7 +1,7 @@
 <?php
 $mypath = 'index.php';
 require_once 'b.php';
-$sql = "SELECT id, name, `date`, user FROM sounds";
+$sql = "SELECT id, name, `date`, user, views FROM sounds";
 $query = $db->prepare($sql);
 $query->execute();
 $names = $query->fetchAll();
@@ -26,6 +26,9 @@ $title = $trans['record list'];
       <span class="space"></span>
       <img class="myicon" src="<?=BASE_PATH?>/image/time.png">
       <span class="time"><?= $f['date'] ?></span>
+      <span class="space"></span>
+      <img class="myicon" src="<?=BASE_PATH?>/image/eye.png">
+      <span class="views"><?= $f['views'] ?></span>
     </div>
   </li>
 <?php } ?>

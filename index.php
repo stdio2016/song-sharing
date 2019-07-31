@@ -21,14 +21,18 @@ $title = $trans['record list'];
   <li>
     <a href='play.php?id=<?=$f['id']?>' class='need-width user-text'><span><?= htmlspecialchars($f['name']) ?></span></a>
     <div class="author">
-      <img class="myicon" src="<?=BASE_PATH?>/image/user.png">
-      <span class="username"><?= $f['user'] ?></span>
-      <span class="space"></span>
-      <img class="myicon" src="<?=BASE_PATH?>/image/time.png">
-      <span class="time"><?= $f['date'] ?></span>
-      <span class="space"></span>
-      <img class="myicon" src="<?=BASE_PATH?>/image/eye.png">
-      <span class="views"><?= $f['views'] ?></span>
+      <div class="field">
+        <img class="myicon" src="<?=BASE_PATH?>/image/user.png">
+        <span class="username"><?= $f['user'] ?></span>
+      </div>
+      <div class="field">
+        <img class="myicon" src="<?=BASE_PATH?>/image/time.png">
+        <span class="time"><?= $f['date'] ?></span>
+      </div>
+      <div class="field">
+        <img class="myicon" src="<?=BASE_PATH?>/image/eye.png">
+        <span class="views"><?= $f['views'] ?></span>
+      </div>
     </div>
   </li>
 <?php } ?>

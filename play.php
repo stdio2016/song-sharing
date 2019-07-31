@@ -27,14 +27,18 @@ $title = $f ? $name : $trans['recording not found'];
 <?php } else { ?>
 <h1 class='user-text'><?= $name ?></h1>
 <div class="author">
-  <img class="myicon" src="<?=BASE_PATH?>/image/user.png">
-  <span class="username"><?= $f['user'] ?></span>
-  <span class="space"></span>
-  <img class="myicon" src="<?=BASE_PATH?>/image/time.png">
-  <span class="time"><?= $f['date'] ?></span>
-  <span class="space"></span>
-  <img class="myicon" src="<?=BASE_PATH?>/image/eye.png">
-  <span class="views"><?= $f['views'] ?></span>
+  <div class="field">
+    <img class="myicon" src="<?=BASE_PATH?>/image/user.png">
+    <span class="username"><?= $f['user'] ?></span>
+  </div>
+  <div class="field">
+    <img class="myicon" src="<?=BASE_PATH?>/image/time.png">
+    <span class="time"><?= $f['date'] ?></span>
+  </div>
+  <div class="field">
+    <img class="myicon" src="<?=BASE_PATH?>/image/eye.png">
+    <span class="views"><?= $f['views'] ?></span>
+  </div>
 </div>
 <?php if ($user === $f['user']) { ?>
 <a onclick="return confirm(Translation['really want to delete song?']+Translation['cannot be undone'])"

@@ -30,8 +30,9 @@ html.volatile-bg {
 .comment > .floor {
   margin-right: 10px;
 }
-span.space {
-  margin-left: 30px;
+div.field {
+  display: inline-block;
+  margin-right: 15px;
 }
 .myicon {
   height: 16px;

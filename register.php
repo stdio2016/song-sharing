@@ -9,7 +9,7 @@ if (logged_in()) {
   exit();
 }
 if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['passwordAgain'])) {
-  $test = preg_match("/^[A-Za-z0-9]{1,20}$/", $_POST['username']);
+  $test = preg_match("/^[A-Za-z0-9]{1,16}$/", $_POST['username']);
   $testP = preg_match("/^[A-Za-z0-9]{0,20}$/", $_POST['password']);
   if ($test != 1) {
     $_SESSION['songs/msg'] = $trans['username restriction'];
